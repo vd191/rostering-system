@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import Navbar from "./components/layout/Navbar";
+import Dashboard from "./components/dashboard/Dashboard";
+import NoteDetails from "./components/notes/NoteDetails";
+import CreateNote from "./components/notes/CreateNote";
+import SignIn from "./components/auth/SignIn";
+import SignUp from "./components/auth/SignUp";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <BrowserRouter>
+        <div >
+          <Navbar />
+          <Switch>
+            <Route path="/" exact component={Dashboard} />
+            <Route path="/note/:id" exact component={NoteDetails} />
+            <Route path="/signin" exact component={SignIn} />
+            <Route path="/signup" exact component={SignUp} />
+            <Route path="/create" exact component={CreateNote} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
