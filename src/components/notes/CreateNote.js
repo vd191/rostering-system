@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createNote } from '../../store/actions/NoteActions';
 
@@ -20,37 +21,52 @@ class CreateNote extends Component {
     console.log(this.state);
 
     this.props.createNote(this.state);
+    this.props.history.push('/');
   }
 
   render() {
+    const { auth } = this.props;
+
+    if (!auth.uid) return <Redirect to='/signin' />
+
     return (
-      <div className="container">
-        <form onSubmit={this.handleSubmit} className="white">
-          <h5 className="grey-text text-darken-3" >Create New Note</h5>
-          <div className="input-field">
-            <label htmlFor="title">Title</label>
-            <input type="text" id="title" onChange={this.handleChange} />
-          </div>
+      <div className="p-5 mh-100 border">
+        <h4 className="text-center m-0"> Create new note </h4>
+        <div className="d-flex justify-content-start">
 
-          <div className="input-field">
-            <label htmlFor="content">Content</label>
-            <textarea className="materialize-textarea" id="content" onChange={this.handleChange} />
+          <form onSubmit={this.handleSubmit} className="w-100" >
 
-          </div>
+            <div className="form-group">
+              <label htmlFor="title" >Title</label>
+              <input className="form-control" type="text" id="title" onChange={this.handleChange} />
+            </div>
 
-          <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">POST</button>
-          </div>
+            <div className="form-group">
+              <label htmlFor="content" >Content</label>
+              <textarea className="form-control" id="content" rows="5" onChange={this.handleChange} />
+            </div>
 
-        </form>
+            <div className="form-group">
+              <button className="btn btn-primary btn-sm">POST</button>
+            </div>
+
+          </form>
+
+        </div>
       </div>
     )
   }
 }
 
-const mapDispatchtToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    createNote: (note)=> dispatch(createNote(note))
+    auth: state.firebase.auth
   }
 }
-export default connect(null, mapDispatchtToProps)(CreateNote)
+
+const mapDispatchtToProps = (dispatch) => {
+  return {
+    createNote: (note) => dispatch(createNote(note))
+  }
+}
+export default connect(mapStateToProps, mapDispatchtToProps)(CreateNote)

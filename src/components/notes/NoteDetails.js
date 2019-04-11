@@ -1,27 +1,32 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import moment from 'moment';
 
 const NoteDetails = (props) => {
-  const { note } = props;
+  const { note, auth } = props;
+
+  if (!auth.uid) return <Redirect to='/signin' />
 
   if (note) {
     return (
-      <div className="container section note-details">
-        <div className="card z-depth-0">
-          <div className="card-content">
-            <span className="card-title"> {note.title} </span>
-            <p>{note.content}</p>
-          </div>
-
-          <div className="card-action grey lighten-4 grey-text">
-            <div> Posted by {note.staffFistName} {note.staffLastName}</div>
-            <div> 2nd September, 2 am</div>
-          </div>
-
+      <div className="p-5 mh-100 border">
+        <div className="d-flex justify-content-center">
+          <h3 className=""> {note.title} </h3>
         </div>
+
+        <p>{note.content}</p>
+
+        <div className="">
+          <p className="card-text m-0">Posted by <span className="text-danger">{note.staffFirstName} {note.staffLastName} </span></p>
+
+          <p className="card-text m-0"><small className="text-muted">{moment(note.createdAt.toDate()).calendar()}</small></p>
+        </div>
+
       </div>
+
     )
 
   } else {
@@ -39,7 +44,8 @@ const mapStateToProps = (state, ownProps) => {
   const notes = state.firestore.data.notes;
   const note = notes ? notes[id] : null;
   return {
-    note: note
+    note: note,
+    auth: state.firebase.auth
   }
 }
 

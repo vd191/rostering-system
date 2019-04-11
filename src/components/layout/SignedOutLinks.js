@@ -3,10 +3,10 @@ import { NavLink } from "react-router-dom";
 
 const SignOutLinks = () => {
   return (
-    <ul className="right">
-      <li><NavLink to='/signup'> Signup </NavLink> </li>
-      <li><NavLink to='/signin'> Login </NavLink> </li>
-    </ul>
+    <div className="navbar-nav">
+      <NavLink className="nav-item nav-link" to='/signup'> Signup </NavLink> 
+      <NavLink className="nav-item nav-link" to='/signin'> Login </NavLink> 
+    </div>
   );
 }
 
