@@ -4,7 +4,7 @@ import CreateShift from './CreateShift';
 import RosterDetails from './RosterDetails';
 
 import { connect } from 'react-redux';
-import { createShift, updateShift } from '../../store/actions/RosterActions';
+import { createShift, updateShift, deleteShift } from '../../store/actions/RosterActions';
 
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -87,6 +87,10 @@ class Roster extends Component {
     this.props.updateShift(this.state);
   }
 
+  handleDeleteRoster = (e) => {
+    this.props.deleteShift(e.target.id);
+  }
+
   render() {
     const { staffs, rosters } = this.props;
     return (
@@ -101,7 +105,14 @@ class Roster extends Component {
           </div>
         </div>
 
-        <TimeSheet rosters={rosters} handleShowUpdateRoster={this.handleShowUpdateRoster} />
+        <p> Click to each "cell" to assign a new shift to employee </p>
+
+        <TimeSheet
+          rosters={rosters}
+          handleShowUpdateRoster={this.handleShowUpdateRoster}
+          handleDeleteRoster={this.handleDeleteRoster}
+
+        />
 
         <CreateShift
           staffs={staffs}
@@ -135,7 +146,8 @@ const mapStateToProps = (state) => {
 const dispatchToProps = (dispatch) => {
   return {
     createShift: (staff) => dispatch(createShift(staff)),
-    updateShift: (shift) => dispatch(updateShift(shift))
+    updateShift: (shift) => dispatch(updateShift(shift)),
+    deleteShift: (id) => dispatch(deleteShift(id)),
   }
 }
 

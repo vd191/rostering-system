@@ -18,12 +18,28 @@ const initState = {
 const rosterReducer = (state = initState, action) => {
   switch (action.type) {
     case "CREATE_ERROR":
-      console.log('created shift error', action.err)
-      return state;
-    case "CREATE_SHIFT":
-      console.log('created shift success', action.staff)
+      console.log('Created shift error', action.err)
       return state;
 
+    case "CREATE_SHIFT":
+      console.log('Created shift success', action.staff)
+      return state;
+
+    case "UPDATE_SHIFT":
+      console.log('Updated shift success', action.shift)
+      return state;
+
+    case "UPDATE_ERROR":
+      console.log('Updated shift error', action.err)
+      return state;
+
+    case "DELETE_SHIFT":
+      console.log('Deleted shift success')
+      return state;
+
+    case "DELETE_ERROR":
+      console.log('Deleted shift error', action.err)
+      return state;
     default:
       return state;
   }

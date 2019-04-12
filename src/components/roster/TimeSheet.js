@@ -1,19 +1,20 @@
 import React from 'react';
 
-const TimeSheet = ({ rosters, handleShowUpdateRoster }) => {
+const TimeSheet = ({ rosters, handleShowUpdateRoster, handleDeleteRoster }) => {
   return (
     <div className="row p-2" >
       <table className="table table-bordered">
-        <thead>
+        <thead className="thead-dark">
           <tr>
-            <th className="col-2">STAFFs</th>
-            <th className="col-1">MON</th>
-            <th className="col-1">TUE</th>
-            <th className="col-1">WED</th>
-            <th className="col-1">THU</th>
-            <th className="col-1">FRI</th>
-            <th className="col-1">SAT</th>
-            <th className="col-1">SUN</th>
+            <th scope="col">STAFFs</th>
+            <th scope="col">MON</th>
+            <th scope="col">TUE</th>
+            <th scope="col">WED</th>
+            <th scope="col">THU</th>
+            <th scope="col">FRI</th>
+            <th scope="col">SAT</th>
+            <th scope="col">SUN</th>
+            <th scope="col">ACTION</th>
           </tr>
         </thead>
         <tbody>
@@ -28,6 +29,9 @@ const TimeSheet = ({ rosters, handleShowUpdateRoster }) => {
               <td id={`${roster.id} fri`} onClick={handleShowUpdateRoster}>{roster.fri.startTime} {roster.fri.startTime? "to" : ''} {roster.fri.finishTime} </td>
               <td id={`${roster.id} sat`} onClick={handleShowUpdateRoster}>{roster.sat.startTime} {roster.sat.startTime? "to" : ''} {roster.sat.finishTime} </td>
               <td id={`${roster.id} sun`} onClick={handleShowUpdateRoster}>{roster.sun.startTime} {roster.sun.startTime? "to" : ''} {roster.sun.finishTime} </td>
+              <th scope="row">
+                <button id={roster.id} onClick={handleDeleteRoster} className="btn btn-link btn-sm">Delete</button>
+              </th>
             </tr>
           )}
 

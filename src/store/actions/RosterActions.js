@@ -24,18 +24,35 @@ export const createShift = (staff) => {
 
 export const updateShift = (shift) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
+
     const firestore = getFirestore();
-
-    console.log(shift);
-    debugger;
-
     firestore.collection('rosters').doc(shift.id).update({
       [shift.date]: {
-        startTime: shift.updateStartTime, 
+        startTime: shift.updateStartTime,
         finishTime: shift.updateFinishTime
       }
     })
+      .then(() => {
+        dispatch({ type: 'UPDATE_SHIFT', shift: shift });
+      })
+      .catch((err) => {
+        dispatch({ type: 'UPDATE_ERROR', err })
+      })
   }
-
 }
 
+
+export const deleteShift = (id) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+
+    const firestore = getFirestore();
+
+    firestore.collection('rosters').doc(id).delete()
+      .then(() => {
+        dispatch({ type: 'DELETE_SHIFT'});
+      })
+      .catch((err) => {
+        dispatch({ type: 'DELETE_ERROR', err })
+      })
+  }
+}

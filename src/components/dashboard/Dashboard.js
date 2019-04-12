@@ -16,6 +16,20 @@ class Dashboard extends Component {
 
     return (
       <div className="dashboard container">
+
+        <div className="card mt-3">
+          <div className="card-header">
+            USEFUL INFORMATION
+          </div>
+          <div className="card-body">
+            <blockquote className="blockquote mb-0">
+              <p>Use the "New Note" button on the top right corner to create a new note if you have any troubles or want to fix the roster. </p>
+              <footer className="blockquote-footer">Thank you <cite title="Source Title"></cite></footer>
+            </blockquote>
+          </div>
+        </div>
+
+
         <div className="row">
           <div className="col-8">
             <NoteList notes={notes} />
