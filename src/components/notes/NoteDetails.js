@@ -17,9 +17,9 @@ const NoteDetails = (props) => {
           <h3 className=""> {note.title} </h3>
         </div>
 
-        <p>{note.content}</p>
+        <p className='text-center mt-4' style={{width:'60%', margin:'0 auto'}}>{note.content}</p>
 
-        <div className="">
+        <div className="text-center mt-4">
           <p className="card-text m-0">Posted by <span className="text-danger">{note.staffFirstName} {note.staffLastName} </span></p>
 
           <p className="card-text m-0"><small className="text-muted">{moment(note.createdAt.toDate()).calendar()}</small></p>
@@ -56,3 +56,5 @@ export default compose(
   ])
 
 )(NoteDetails)
+
+

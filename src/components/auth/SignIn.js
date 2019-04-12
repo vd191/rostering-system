@@ -28,37 +28,41 @@ class SignIn extends Component {
     if (auth.uid) return <Redirect to='/' />
 
     return (
-      <div className="p-5 mh-100 border">
-        <div className="d-flex justify-content-center mb-3"><img src={logo} alt="Logo" className="d-inline-block" width="100" height="100"/></div>
-        <h4 className="text-center m-0"> SIGN IN </h4>
-        <h6 className="text-center mb-5"> Baker's Delight</h6>
-        <div className="d-flex justify-content-center">
-          <form onSubmit={this.handleSubmit}>
-          
-            <div className="form-group row">
-              <label htmlFor="email" className="col-sm-3 col-form-label pl-0" >Email</label>
-              <div className="col-sm-9">
-                <input className="form-control" type="email" id="email" onChange={this.handleChange} />
+      <div className="p-5 mh-100">
+        <div className="border row p-3" style={{width:"70%", margin: "0 auto"}}>
+
+          <div className="col-6">
+            <div className="d-flex justify-content-end">
+              <img src={logo} alt="Logo" className="d-inline-block" width="250" height="250" />
+            </div>
+          </div>
+
+
+          <div className="col-6 d-flex align-items-center">
+            <form onSubmit={this.handleSubmit}>
+              <h5 className="mb-3"> SIGN IN </h5>
+              <div className="text-monospace text-danger">
+                {authError ? <p>{authError}</p> : null}
               </div>
-            </div>
 
-
-            <div className="form-group row">
-              <label htmlFor="password" className="col-sm-3 col-form-label pl-0" >Password</label>
-              <div className="col-sm-9">
-                <input className="form-control" type="password" id="password" onChange={this.handleChange} />
+              <div className="form-group">
+                {/* <label htmlFor="email" className="col-form-label pl-0" >Email</label> */}
+                <input placeholder="Enter your email" className="form-control" type="email" id="email" onChange={this.handleChange} />
               </div>
-            </div>
 
-            <div className="form-group row">
-              <button class="btn btn-primary btn-sm col-sm-3 col-form-label">Login</button>
-            </div>
 
-            <div className="text-center text-monospace text-danger">
-              {authError ? <p>{authError}</p> : null}
-            </div>
-          </form >
+              <div className="form-group">
+                {/* <label htmlFor="password" className=" col-form-label pl-0" >Password</label> */}
+                <input placeholder="Enter your password" className="form-control" type="password" id="password" onChange={this.handleChange} />
+              </div>
 
+
+              <div className="form-group">
+                <button class="btn btn-primary btn-sm col-sm-3 col-form-label">Login</button>
+              </div>
+            </form >
+
+          </div>
         </div>
 
       </div>

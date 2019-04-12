@@ -7,6 +7,7 @@ const SignInLinks = (props) => {
 
   return (
     <div className="navbar-nav">
+      <NavLink className="nav-item nav-link" to='/roster'> Roster</NavLink> 
       <NavLink className="nav-item nav-link" to='/create'> New Note</NavLink> 
       <a className="nav-item nav-link" onClick={props.signOut}> Log Out </a> 
       <NavLink className="nav-item nav-link" to='/'  > {props.profile.firstName} {props.profile.lastName}  </NavLink> 

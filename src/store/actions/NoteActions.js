@@ -12,7 +12,6 @@ export const createNote = (note) => {
       staffLastName: profile.lastName,
       staffId: staffId,
       createdAt: new Date()
-
     }) 
     .then(() => {
       dispatch({ type: 'CREATE_NOTE', note });

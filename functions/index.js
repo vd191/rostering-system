@@ -42,3 +42,4 @@ exports.userJoined = functions.auth.user()
 
       })
   })
+
